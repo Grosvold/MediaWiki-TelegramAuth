@@ -1,4 +1,4 @@
-# Вики Горпроектов
+# Telegram auth extensions for MediaWiki
 
 > **EN:** This repo contains setup instructions for a [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) instance that uses [Telegram auth](https://core.telegram.org/widgets/login) for user to login
 >
