@@ -10,16 +10,12 @@ Public/blob/main/README.md)
 ## Цель проекта:
 
 1. Вырезать все лишнее из проекта [city4people-wiki](https://github.com/kachkaev/city4people-wiki)
-2. Обновить расширение для актуальных версий PluggableAuth и MediaWiki
-
-[Вики](https://ru.wikipedia.org/wiki/Вики)
-
-
-Моя личная цель - организовать авторизацию на wiki.euc.club посредством [Telegram auth](https://core.telegram.org/widgets/login)
+2. Обновить TelegramAuth расширение для актуальных версий PluggableAuth 6.2 и MediaWiki 1.39
 
 
 
-
+Моя личная цель - организовать авторизацию на 
+[Вики](https://ru.wikipedia.org/wiki/Вики) wiki.euc.club посредством [Telegram auth](https://core.telegram.org/widgets/login)
 
 
 TelegramAuth  
@@ -39,12 +35,12 @@ author:
 
 Текущая реализация бота не работает с актуальной PluggableAuth 6.2 PluggableAuth-REL1_39-e7de886.tar.gz, при включении TelegramAuth выдаётся ошибка типа  
 [a2c074fed04df0fc5e75ecf1] 2023-01-22 02:49:40: Неустранимое исключение типа «Error».  
-с версией PluggableAuth 5.7 PluggableAuth-REL1_35-6d28813.tar.gz, если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
+с версией PluggableAuth 5.7 PluggableAuth-REL1_35-6d28813.tar.gz, если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/Служебная:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
 PluggableAuth 5.7 PluggableAuth-REL1_37-c1cc644.tar.gz также как с REL1_35-6d28813  
 PluggableAuth 5.7 PluggableAuth-REL1_36-17859c9.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.  
 PluggableAuth 6.1 PluggableAuth-REL1_38-d7cb5c7.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.
 
-
+Автор TelegramAuth удалил свое детище с github, но один из его разработчика одобрил использование и сазал, что он подразумевал использование его под лицензией (BSD-3-Clause)[https://opensource.org/licenses/BSD-3-Clause]
 
 ## Ниже частично прореженные остатки инструкции от kachkaev
 ---
