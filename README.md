@@ -22,32 +22,26 @@ Public/blob/main/README.md)
 
 
 
-TelegramAuth 
-
+TelegramAuth  
 * version: 1.0,
 
-requires:
-
-* MediaWiki: >= 1.34.0,
-
+requires:  
+* MediaWiki: >= 1.34.0,  
 * extensions: PluggableAuth: >= 5.1
 
-author:
-
-* [Kachkaev](https://github.com/kachkaev/)
-
-* [Kachkaev](https://www.mediawiki.org/wiki/User:Kachkaev)
-
+author:  
+* [Kachkaev](https://github.com/kachkaev/)  
+* [Kachkaev](https://www.mediawiki.org/wiki/User:Kachkaev)  
 * [Banakin](https://www.mediawiki.org/wiki/User:Banakin900)
 
 [Адрес расширения на MediaWiki](https://www.mediawiki.org/wiki/Extension:TelegramAuth) (удалено или не было опубликовано)
 
 
-Текущая реализация бота не работает с актуальной PluggableAuth 6.2 PluggableAuth-REL1_39-e7de886.tar.gz, при включении TelegramAuth выдаётся ошибка типа.
-[a2c074fed04df0fc5e75ecf1] 2023-01-22 02:49:40: Неустранимое исключение типа «Error».
-с версией PluggableAuth 5.7 PluggableAuth-REL1_35-6d28813.tar.gz, если я правильно понял авторизацию PluggableAuth принимает, но не может её передать в MediaWiki.
-PluggableAuth 5.7 PluggableAuth-REL1_36-17859c9.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.
-PluggableAuth 5.7 PluggableAuth-REL1_37-c1cc644.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.
+Текущая реализация бота не работает с актуальной PluggableAuth 6.2 PluggableAuth-REL1_39-e7de886.tar.gz, при включении TelegramAuth выдаётся ошибка типа  
+[a2c074fed04df0fc5e75ecf1] 2023-01-22 02:49:40: Неустранимое исключение типа «Error».  
+с версией PluggableAuth 5.7 PluggableAuth-REL1_35-6d28813.tar.gz, если я правильно понял авторизацию PluggableAuth принимает, но не может её передать в MediaWiki.  
+PluggableAuth 5.7 PluggableAuth-REL1_36-17859c9.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.  
+PluggableAuth 5.7 PluggableAuth-REL1_37-c1cc644.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.  
 PluggableAuth 6.1 PluggableAuth-REL1_38-d7cb5c7.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.
 
 
