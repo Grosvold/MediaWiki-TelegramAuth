@@ -6,9 +6,6 @@
 Public/blob/main/README.md)
 
 &nbsp;  
-&nbsp;  
-&nbsp;  
-&nbsp;
 
 ## Цель проекта:
 
@@ -18,12 +15,7 @@ Public/blob/main/README.md)
 [Вики](https://ru.wikipedia.org/wiki/Вики)
 
 
-
 Моя личная цель - организовать авторизацию на wiki.euc.club посредством [Telegram auth](https://core.telegram.org/widgets/login)
-
-
-
-
 
 
 
@@ -34,18 +26,23 @@ Public/blob/main/README.md)
 
 
 TelegramAuth 
+
 *version: 1.0,
+
+requires:
+
+MediaWiki: >= 1.34.0,
+extensions: PluggableAuth: >= 5.1
+
 *author:
+
 *[Kachkaev](https://github.com/kachkaev/)
+
 *[Kachkaev](https://www.mediawiki.org/wiki/User:Kachkaev)
+
 *[Banakin](https://www.mediawiki.org/wiki/User:Banakin900)
 
 [Адрес расширения на MediaWiki](https://www.mediawiki.org/wiki/Extension:TelegramAuth) (удалено или не было опубликовано)
-
-  requires:
-    MediaWiki: >= 1.34.0,
-    extensions: 
-      PluggableAuth: >= 5.1
 
 
 
