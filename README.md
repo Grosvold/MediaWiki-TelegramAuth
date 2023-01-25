@@ -5,8 +5,6 @@
 > 👀 [English version via Google Translate](https://translate.google.com/translate?sl=ru&tl=en&u=https://github.com/grosvold/MediaWiki-TelegramAuth
 Public/blob/main/README.md)
 
-&nbsp;  
-
 ## Цель проекта:
 
 1. Вырезать все лишнее из проекта [city4people-wiki](https://github.com/kachkaev/city4people-wiki)
@@ -33,12 +31,12 @@ author:
 [Адрес расширения на MediaWiki](https://www.mediawiki.org/wiki/Extension:TelegramAuth) (удалено или не было опубликовано)
 
 
-Текущая реализация бота не работает с актуальной PluggableAuth 6.2 PluggableAuth-REL1_39-e7de886.tar.gz, при включении TelegramAuth выдаётся ошибка типа  
+Текущая реализация бота не работает с актуальной PluggableAuth 6.2 [REL1_39-e7de886](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_39-e7de886.tar.gz), при включении TelegramAuth выдаётся ошибка типа  
 [a2c074fed04df0fc5e75ecf1] 2023-01-22 02:49:40: Неустранимое исключение типа «Error».  
-с версией PluggableAuth 5.7 PluggableAuth-REL1_35-6d28813.tar.gz, если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/Служебная:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
-PluggableAuth 5.7 PluggableAuth-REL1_37-c1cc644.tar.gz также как с REL1_35-6d28813  
-PluggableAuth 5.7 PluggableAuth-REL1_36-17859c9.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.  
-PluggableAuth 6.1 PluggableAuth-REL1_38-d7cb5c7.tar.gz работа плагина с MediaWiki 1.39.0 не проверялась.
+с версией PluggableAuth 5.7 [REL1_35-6d28813](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_35-6d28813.tar.gz), если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/Служебная:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
+PluggableAuth 5.7 [REL1_37-c1cc644](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-c1cc644.tar.gz) также как с REL1_35-6d28813  
+PluggableAuth 5.7 [REL1_36-17859c9](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_36-17859c9.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.  
+PluggableAuth 6.1 [REL1_38-d7cb5c7](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_38-d7cb5c7.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.
 
 Автор TelegramAuth удалил свое детище с github, но один из его разработчика одобрил использование и сазал, что он подразумевал использование его под лицензией (BSD-3-Clause)[https://opensource.org/licenses/BSD-3-Clause]
 
@@ -74,36 +72,7 @@ PluggableAuth 6.1 PluggableAuth-REL1_38-d7cb5c7.tar.gz работа плагин
 
 ### Требования к среде
 
-1.  Кластер на [Кубернетисе](https://kubernetes.io)
 
-    - ☑️ Возможность удовлетворять запросы на создания хранилищ _(persistent volume claims)_ в режиме `ReadWriteMany`
-
-      Для каждого экземпляра вики рекомендуется выделять минимум 10 гигабайт для БД И 20 гигабайт для медиа-загрузок
-
-    - ☑️ [Трафик](https://traefik.io) в качестве ингрес-контроллера
-
-      Если используется другой контроллер, от инструкций ниже придётся немного отступить
-
-    - Автоматический резолвер сертификатов [Летс-энкрипт](https://letsencrypt.org) в ингрес-контроллере
-
-1.  Локально установленные команды `kubectl` и `helm`
-
-1.  Настроенный доступ к кластеру (`KUBECONFIG`) с правом создавать ресурсы в пространстве имён `city4people-wiki`
-
-1.  Доступ по `SSH` к хранилищам в кластере
-
-    Требуется для загрузки и обновления ресурсов Медиавики (настройки, дополнительные расширения, и т. д.)
-
-1.  Доступ к реестру с образами контейнеров на Гитхабе
-
-    См. <https://stackoverflow.com/a/61912590/1818285>
-
-    ```sh
-    # GITHUB_USER=
-    # GITHUB_TOKEN=
-    
-    echo "{\"auths\":{\"docker.pkg.github.com\":{\"auth\":\"$(echo -n ${GITHUB_USER}:${GITHUB_TOKEN} | base64)\"}}}" | kubectl create secret generic dockerconfigjson-github-com --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/dev/stdin --namespace=city4people-wiki
-    ```
 
 ### Развёртывание Медиавики
 
@@ -116,51 +85,6 @@ PluggableAuth 6.1 PluggableAuth-REL1_38-d7cb5c7.tar.gz работа плагин
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-INSTANCE=main
-INSTANCE_HOST=city4people-wiki.ru
-MEDIAWIKI_NAME="Вики Горпроектов"
-# MARIADB_ROOTUSER_PASSWORD=
-# MEDIAWIKI_PASSWORD=
-
-INSTANCE=sandbox
-INSTANCE_HOST=sandbox.city4people-wiki.ru
-MEDIAWIKI_NAME="Вики-песочница"
-# MARIADB_ROOTUSER_PASSWORD=
-# MEDIAWIKI_PASSWORD=
-
-cat <<EOF >/tmp/values-for-webapp.yaml
-image:
-  tag: 1.35.0-debian-10-r8
-service:
-  type: ClusterIP
-persistence:
-  accessMode: ReadWriteMany
-  enabled: true
-  size: 20Gi
-allowEmptyPassword: no
-mediawikiEmail: alexander@kachkaev.ru
-mediawikiHost: ${INSTANCE_HOST}
-mediawikiName: ${MEDIAWIKI_NAME}
-mediawikiPassword: "${MEDIAWIKI_PASSWORD}"
-mediawikiUser: admin
-mariadb:
-  master:
-    persistence:
-      accessModes:
-        - ReadWriteMany
-      enabled: true
-      size: 10Gi
-  rootUser:
-    password: "${MARIADB_ROOTUSER_PASSWORD}"
-EOF
-
-## install
-helm install --namespace=city4people-wiki "${INSTANCE}-webapp" bitnami/mediawiki --values /tmp/values-for-webapp.yaml
-
-## upgrade
-helm upgrade --namespace=city4people-wiki "${INSTANCE}-webapp" bitnami/mediawiki --values /tmp/values-for-webapp.yaml
-
-## uninstall
 # helm uninstall --namespace=city4people-wiki "${INSTANCE}-webapp"
 ```
 
@@ -172,37 +96,7 @@ helm upgrade --namespace=city4people-wiki "${INSTANCE}-webapp" bitnami/mediawiki
 Если вместо Трафика используется nginx или другой тип ингрес-контроллера, чарт придётся подправить.
 
 ```sh
-INSTANCE=main
-cat <<EOF >/tmp/values-for-webapp-ingress.yaml
-host: city4people-wiki.ru
-serviceName: main-webapp-mediawiki
-extraFiles:
-  - path: robots.txt
-    content: |-
-      User-agent: *
-      Allow: /
-      Disallow: /*?*mobileaction=
-EOF
-
-INSTANCE=sandbox
-cat <<EOF >/tmp/values-for-webapp-ingress.yaml
-host: sandbox.city4people-wiki.ru
-serviceName: mediawiki
-extraFiles:
-  - path: robots.txt
-    content: |-
-      User-agent: *
-      Disallow: /
-EOF
-
-## install
-helm install --namespace=city4people-wiki "${INSTANCE}-webapp-ingress" ./helm-charts/webapp-ingress --values /tmp/values-for-webapp-ingress.yaml
-
-## upgrade
-helm upgrade --namespace=city4people-wiki "${INSTANCE}-webapp-ingress" ./helm-charts/webapp-ingress --values /tmp/values-for-webapp-ingress.yaml
-
-## uninstall
-# helm uninstall --namespace=city4people-wiki "${INSTANCE}-webapp-ingress"
+Это код
 ```
 
 ### Развёртывание Телеграм-бота
@@ -216,52 +110,7 @@ helm upgrade --namespace=city4people-wiki "${INSTANCE}-webapp-ingress" ./helm-ch
 Развёртывать сервер для бота строго говоря не обязательно, так как весь процесс авторизации проводит сам Телеграм.
 Работающий бот лишь отвечает на сообщения пользователей ссылкой на вики.
 
-```sh
-INSTANCE=main
-INSTANCE_HOST=city4people-wiki.ru
-TELEGRAM_BOT_USERNAME=city4people_wiki_bot
-# TELEGRAM_BOT_TOKEN=
 
-INSTANCE=sandbox
-INSTANCE_HOST=sandbox.city4people-wiki.ru
-TELEGRAM_BOT_USERNAME=sandbox_wiki_bot
-# TELEGRAM_BOT_TOKEN=
-
-IMAGE_TAG=v2020100301
-
-cat <<EOF >/tmp/values-for-telegram-bot.yaml
-botDomain: "${INSTANCE_HOST}"
-botToken: "${TELEGRAM_BOT_TOKEN}"
-botUsername: ${TELEGRAM_BOT_USERNAME}
-image:
-  tag: ${IMAGE_TAG}
-imagePullSecrets:
-  - name: dockerconfigjson-github-com
-resources:
-  requests:
-    cpu: 10m
-    memory: 100Mi
-  limits:
-    cpu: 1000m
-    memory: 200Mi
-EOF
-
-## install
-helm install --namespace=city4people-wiki "${INSTANCE}-telegram-bot" ./helm-charts/telegram-bot --values /tmp/values-for-telegram-bot.yaml
-
-## upgrade
-helm upgrade --namespace=city4people-wiki "${INSTANCE}-telegram-bot" ./helm-charts/telegram-bot --values /tmp/values-for-telegram-bot.yaml
-
-## uninstall
-# helm uninstall --namespace=city4people-wiki "${INSTANCE}-telegram-bot"
-```
-
-### Донастройка Медиавики после развёртывания
-
-```sh
-MEDIAWIKI_PV_SSH_HOST=kachkaev--firstvds--city4people-wiki
-MEDIAWIKI_PV_PATH=/var/www/local-pvs/city4people-wiki-main-mediawiki
-```
 
 #### Синхронизация ресурсов Медиавики из этого репозитория
 
@@ -313,7 +162,7 @@ rsync --archive --stats --human-readable visuals/main/mediawiki/*.png ${MEDIAWIK
 
 #### Расширения
 
-Установка дополнительных расширений для Медиавики делает движок более похожим на Википедию, что упрощает работу участникам.
+Установка дополнительных расширений для Медиавики.
 
 Эти же команды используются для обновления расширений после выхода новых версий.
 
@@ -321,14 +170,6 @@ rsync --archive --stats --human-readable visuals/main/mediawiki/*.png ${MEDIAWIK
 ## ℹ️ Терминал внутри MEDIAWIKI_PV_SSH_HOST
 
 EXTENSIONS_DIR=${MEDIAWIKI_PV_PATH}/mediawiki/extensions
-
-## https://www.mediawiki.org/wiki/Extension:MobileFrontend
-mv ${EXTENSIONS_DIR}/MobileFrontend ${EXTENSIONS_DIR}/MobileFrontend.bak
-wget -c https://extdist.wmflabs.org/dist/extensions/MobileFrontend-REL1_35-8d06152.tar.gz -O - | tar -xz -C $EXTENSIONS_DIR
-
-## https://www.mediawiki.org/wiki/Extension:TemplateStyles
-mv ${EXTENSIONS_DIR}/TemplateStyles ${EXTENSIONS_DIR}/TemplateStyles.bak
-wget -c https://extdist.wmflabs.org/dist/extensions/TemplateStyles-REL1_35-7743810.tar.gz -O - | tar -xz -C $EXTENSIONS_DIR
 
 mv ${EXTENSIONS_DIR}/PluggableAuth ${EXTENSIONS_DIR}/PluggableAuth.bak
 wget -c https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_35-2a465ae.tar.gz -O - | tar -xz -C $EXTENSIONS_DIR
