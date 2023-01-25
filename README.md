@@ -13,11 +13,11 @@ Public/blob/main/README.md)
 
 
 Моя личная цель - организовать авторизацию на 
-[Вики](https://ru.wikipedia.org/wiki/Вики) wiki.euc.club посредством [Telegram auth](https://core.telegram.org/widgets/login)
+[Вики](https://ru.wikipedia.org/wiki/Вики) проекта [wiki.euc.club](https://wiki.euc.club) посредством [Telegram Login Widget](https://core.telegram.org/widgets/login)
 
 
 TelegramAuth  
-* version: 1.0,
+* version: 1.0
 
 requires:  
 * MediaWiki: >= 1.34.0,  
@@ -31,20 +31,21 @@ author:
 [Адрес расширения на MediaWiki](https://www.mediawiki.org/wiki/Extension:TelegramAuth) (удалено или не было опубликовано)
 
 ## Что не так?
-Текущая реализация бота не работает с актуальной PluggableAuth 6.2 [REL1_39-e7de886](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_39-e7de886.tar.gz), при включении TelegramAuth выдаётся ошибка типа  
+* Текущая реализация бота не работает с актуальной PluggableAuth 6.2 [REL1_39-e7de886](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_39-e7de886.tar.gz), при включении TelegramAuth выдаётся ошибка типа  
 [a2c074fed04df0fc5e75ecf1] 2023-01-22 02:49:40: Неустранимое исключение типа «Error».  
-с версией PluggableAuth 5.7 [REL1_35-6d28813](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_35-6d28813.tar.gz), если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/Служебная:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
-PluggableAuth 5.7 [REL1_37-c1cc644](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-c1cc644.tar.gz) также как с REL1_35-6d28813  
-PluggableAuth 5.7 [REL1_36-17859c9](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_36-17859c9.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.  
-PluggableAuth 6.1 [REL1_38-d7cb5c7](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_38-d7cb5c7.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.
+* с версией PluggableAuth 5.7 [REL1_35-6d28813](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_35-6d28813.tar.gz), если я правильно понял авторизацию PluggableAuth принимает, переадресует на пустую страницу (https://wiki.euc.club/index.php/Служебная:PluggableAuthLogin) но не может её передать в MediaWiki. При переходе на главную страницу видно, что авторизация не прошла.  
+* PluggableAuth 5.7 [REL1_37-c1cc644](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-c1cc644.tar.gz) также как с REL1_35-6d28813  
+* PluggableAuth 5.7 [REL1_36-17859c9](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_36-17859c9.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.  
+* PluggableAuth 6.1 [REL1_38-d7cb5c7](https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_38-d7cb5c7.tar.gz) работа плагина с MediaWiki 1.39.0 не проверялась.
 
 ## Лицензия
 Автор [Banakin (MediaWiki)](https://www.mediawiki.org/wiki/User:Banakin900) удалил свое детище с github, однако [Kachkaev (github)](https://github.com/kachkaev/) одобрил использование под лицензией [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause)
 
-## Ниже частично прореженные остатки инструкции от kachkaev
 ---
+## Ниже частично прореженные инструкции от kachkaev 
+(Нужно чистить)
 
-[Вики Горпроектов](https://city4people-wiki.ru) работает на [Медиавики](https://mediawiki.org) — том же движке, что и Википедия.
+[Медиавики](https://mediawiki.org) — тот же движок, что и Википедия.
 Этот выбор определяет низкий порог входа для участников, а также задаёт понятные и проверенные правила для взаимодействия в сообществе.
 
 Все технические компоненты вики имеют открытый исходный код и не требуют платных лицензий.
@@ -55,50 +56,10 @@ PluggableAuth 6.1 [REL1_38-d7cb5c7](https://extdist.wmflabs.org/dist/extensions/
 Благодаря этой интеграции участникам не приходится придумывать логины и пароли, а администраторам проще отслеживать и модерировать правки.
 
 Войти в вики может любой пользователь Телеграма при наличии имени пользователя в профиле.
-Существует техническая возможность варьировать доступ к страницам в зависимости от статуса человека в федеральной сети ГП — это требует дополнительной настройки.
+Существует техническая возможность варьировать доступ к страницам в зависимости от статуса человека — это требует дополнительной настройки.
 
 ---
 
-Каждый экземпляр вики включает следующие компоненты:
-
-- [Хелм-чарт для развёртывания Медиавики](https://hub.helm.sh/charts/bitnami/mediawiki) (создан компанией Битнами)
-
-- [Хелм-чарт для настройки внешнего доступа к вики](./helm-charts/webapp-ingress) (в этом репозитории)
-
-- [Исходники телеграм-бота](./telegram-bot), [скрипт для его контейнеризации](./github/workflow/docker.yml) и [хемл-чарт для развёртывания](./helm-charts/webapp-ingress) (в этом репозитории)
-
-Образ контейнера для телеграм-бота [хранится на Гитхабе](https://github.com/kachkaev/city4people-wiki/packages) и автоматически обновляется при создании нового [релиза](https://github.com/kachkaev/city4people-wiki/releases).
-
-## Развёртывание
-
-### Требования к среде
-
-
-
-### Развёртывание Медиавики
-
-Используется хелм-чарт, созданный компанией Битнами
-
-- [документация](https://hub.helm.sh/charts/bitnami/mediawiki)
-- [исходники](https://github.com/bitnami/charts/tree/master/bitnami/mediawiki)
-- [файл values.yaml](https://github.com/bitnami/charts/blob/master/bitnami/mediawiki/values.yaml)
-
-```sh
-helm repo add bitnami https://charts.bitnami.com/bitnami
-
-# helm uninstall --namespace=city4people-wiki "${INSTANCE}-webapp"
-```
-
-### Настройка внешнего доступа к вики
-
-В отдельном [хелм-чарте для ингреса](./helm-charts/webapp-ingress) используются [нестандартные ресурсы Кубернетиса](https://doc.traefik.io/traefik/v2.3/providers/kubernetes-crd/) _(Custom Resource Definitions)_.
-Они помогают настроить перенаправления с поддомена `www`, заголовки `HTTP`-запросов и сжатие данных.
-
-Если вместо Трафика используется nginx или другой тип ингрес-контроллера, чарт придётся подправить.
-
-```sh
-Это код
-```
 
 ### Развёртывание Телеграм-бота
 
